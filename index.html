@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我在臺灣等寶寶平安回來</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入芫荽字體 (Iansui) — 台灣繁體中文手寫風格字型 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Iansui&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Iansui', 'Klee One', cursive;
+            background-color: #e5e5f7;
+            opacity: 1;
+            /* 柔和的點狀背景，模擬桌布質感 */
+            background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* 3D 翻轉卡片的核心 CSS */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            /* Safari 支援 */
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        /* 讓信紙有微微的紙張紋理感 */
+        .paper-texture {
+            background-color: #fdfbf7;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        /* 自定義滾動條 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen py-10 px-4 flex justify-center items-start">
+
+    <!-- 浮動提示訊息 -->
+    <div
+        class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-md border border-pink-100 flex items-center gap-2 text-pink-600 text-sm md:text-base animate-bounce">
+        <span>✨ 溫馨提示：點擊照片可以翻到背面喔！ ✨</span>
+    </div>
+
+    <!-- A4 比例容器 (寬度限制，高度自適應延伸) -->
+    <div
+        class="paper-texture w-full max-w-4xl shadow-2xl rounded-sm p-6 md:p-12 lg:p-16 relative text-gray-800 leading-relaxed">
+
+        <!-- 裝飾元素 -->
+        <div class="absolute top-8 right-8 text-2xl opacity-80 transform rotate-12">🐶✨</div>
+        <div class="absolute top-40 left-6 text-2xl opacity-80 transform -rotate-12">💖</div>
+
+        <!-- 開頭問候 -->
+        <h1 class="text-2xl md:text-3xl font-semibold mb-8 text-gray-900">Dear 葉寶：</h1>
+
+        <!-- 第一區塊：前兩段文字 + 兩張照片 -->
+        <div class="flex flex-col md:flex-row gap-8 mb-10 items-start">
+            <div class="flex-1 text-lg md:text-xl space-y-6">
+                <p class="indent-8 text-justify">
+                    哈妞～我是你的嘻嘻大寶寶，今天過後你就要離開台灣ㄌ，不知道你到美國之後，能不能很快就適應環境，也不知道有沒有吃飽睡好，我可是非常擔心我的妙萱寶寶！在我沒辦法餵胖你的這端期間，雖然在省錢，但是也不能把身體搞壞知道嗎！
+                </p>
+                <p class="indent-8 text-justify">
+                    寶寶在美國的這幾個月，肯定會非常想我吧！而我在台灣也是一樣喔，無時無刻都想要黏在寶寶身邊，但我已經是個成熟的大人啦，所以我會乖乖在台灣等寶寶從美國回來ㄉ，你不在的這段時間，我向寶寶保證，我也會讓自己充實的過每一天，也會好好照顧自己，不會讓寶寶擔心，當然就算再忙，一有空馬上就會回寶寶訊息，頂多晚一點點回，希望寶寶不要想太多，我的愛永遠只會放在你身上，我不會給其他人，他們也拿不走的。
+                </p>
+            </div>
+            <!-- 照片群組 1 -->
+            <div class="flex flex-col gap-4 items-center w-full md:w-auto">
+                <!-- 照片 1 -->
+                <div class="w-48 h-56 perspective-1000 transform md:rotate-3">
+                    <div class="w-full h-full transition-transform duration-700 transform-style-3d cursor-pointer shadow-md hover:shadow-xl rounded-sm"
+                        onclick="this.classList.toggle('rotate-y-180')">
+                        <!-- 正面 -->
+                        <div
+                            class="absolute inset-0 backface-hidden bg-white p-2 md:p-3 border border-gray-200 flex flex-col overflow-hidden rounded-sm">
+                            <img src="images/image1.jpeg" class="w-full h-full object-cover" alt="照片1">
+                        </div>
+                        <!-- 背面 -->
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 bg-[#fff5f7] p-4 border-2 border-dashed border-pink-200 flex items-center justify-center text-center rounded-sm">
+                            <span class="text-gray-600 text-sm md:text-base">(背面文字<br>晚一點補充)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 照片 2 -->
+                <div class="w-48 h-56 perspective-1000 transform md:-rotate-2">
+                    <div class="w-full h-full transition-transform duration-700 transform-style-3d cursor-pointer shadow-md hover:shadow-xl rounded-sm"
+                        onclick="this.classList.toggle('rotate-y-180')">
+                        <div
+                            class="absolute inset-0 backface-hidden bg-white p-2 md:p-3 border border-gray-200 flex flex-col overflow-hidden rounded-sm">
+                            <img src="images/image2.jpeg" class="w-full h-full object-cover" alt="照片2">
+                        </div>
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 bg-[#fff5f7] p-4 border-2 border-dashed border-pink-200 flex items-center justify-center text-center rounded-sm">
+                            <span class="text-gray-600 text-sm md:text-base">(背面文字<br>晚一點補充)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 裝飾線 -->
+        <div class="flex justify-center my-8 text-pink-300 gap-2">
+            <span>〰️</span><span>〰️</span><span>〰️</span><span>💌</span><span>〰️</span><span>〰️</span><span>〰️</span>
+        </div>
+
+        <!-- 第二區塊：第三、四段文字 + 兩張照片 (排版反轉) -->
+        <div class="flex flex-col md:flex-row-reverse gap-8 mb-10 items-center">
+            <div class="flex-1 text-lg md:text-xl space-y-6">
+                <p class="indent-8 text-justify">
+                    上次給你的生日卡片，你已經提前看過了，不知道你有沒有帶在身邊，所以我想再寫一封信給你，讓你想我的時候就能拿出來看看，讓寶寶想太多的時候，也能安心一點～
+                </p>
+                <p class="indent-8 text-justify">
+                    回想起我們去了不少地方，也一起做了很多事情，但我總覺得還不夠，感覺跟你在一起的時候，就有做不完的事情，每個都讓我那麼期待和興奮，我好期待等你回來之後，等我當完兵出來之後，我們就正式的開始了進入社會的愛情，雖然找工作、找房子都是一段艱辛的過程，但是我寶寶那麼厲害肯定沒問題！就算事情不如意，我們也一樣能把生活過得很好！
+                </p>
+            </div>
+            <!-- 照片群組 2 -->
+            <div class="flex flex-col gap-4 items-center w-full md:w-auto">
+                <!-- 照片 3 -->
+                <div class="w-48 h-56 perspective-1000 transform md:-rotate-3">
+                    <div class="w-full h-full transition-transform duration-700 transform-style-3d cursor-pointer shadow-md hover:shadow-xl rounded-sm"
+                        onclick="this.classList.toggle('rotate-y-180')">
+                        <div
+                            class="absolute inset-0 backface-hidden bg-white p-2 md:p-3 border border-gray-200 flex flex-col overflow-hidden rounded-sm">
+                            <img src="images/image3.jpeg" class="w-full h-full object-cover" alt="照片3">
+                        </div>
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 bg-[#fff5f7] p-4 border-2 border-dashed border-pink-200 flex items-center justify-center text-center rounded-sm">
+                            <span class="text-gray-600 text-sm md:text-base">(背面文字<br>晚一點補充)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 照片 4 -->
+                <div class="w-48 h-56 perspective-1000 transform md:rotate-2">
+                    <div class="w-full h-full transition-transform duration-700 transform-style-3d cursor-pointer shadow-md hover:shadow-xl rounded-sm"
+                        onclick="this.classList.toggle('rotate-y-180')">
+                        <div
+                            class="absolute inset-0 backface-hidden bg-white p-2 md:p-3 border border-gray-200 flex flex-col overflow-hidden rounded-sm">
+                            <img src="images/image4.jpeg" class="w-full h-full object-cover" alt="照片4">
+                        </div>
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 bg-[#fff5f7] p-4 border-2 border-dashed border-pink-200 flex items-center justify-center text-center rounded-sm">
+                            <span class="text-gray-600 text-sm md:text-base">(背面文字<br>晚一點補充)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第三區塊：第五段文字 (歌詞願望) + 照片 5 & 6 -->
+        <div
+            class="flex flex-col md:flex-row gap-8 mb-10 items-center bg-pink-50/50 p-6 rounded-xl border border-pink-100 relative">
+            <!-- 裝飾 -->
+            <div class="absolute top-2 left-2 text-xl opacity-70">🎶</div>
+            <div class="absolute bottom-2 right-2 text-xl opacity-70">🐕</div>
+
+            <div class="flex-1 text-lg md:text-xl space-y-4">
+                <p class="indent-8 text-justify">
+                    還記得我許的生日願望是希望能跟寶寶住在一起，還有一起養寵物，我很喜歡唱歌，跟寶寶在一起的日子裡，我特別會想到這段歌詞，<span
+                        class="text-pink-600 font-semibold bg-pink-100 px-1 rounded">「其實我 常會想像我們老了的樣子 左邊牽著手 右手拉小狗
+                        可能還有很多小孩子」</span>—理想混蛋【不是因為天氣晴朗才愛你】。
+                </p>
+                <p class="indent-8 text-justify">
+                    我也想像過無數遍那樣美好的生活，是左邊牽著心愛的人的手，右邊牽著我們可愛的小狗，漫步在無憂無慮的夕陽河邊，吹著溫柔且優雅的晚風，談笑間不斷逸散著幸福的氣味，沒有寶寶你，這個夢想永遠只能留在我的夢裡，因為你，它才變成了可能，才變成了我們的未來模樣。
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-4 items-center w-full md:w-auto">
+                <!-- 照片 5 -->
+                <div class="w-44 h-52 perspective-1000 transform md:-rotate-6">
+                    <div class="w-full h-full transition-transform duration-700 transform-style-3d cursor-pointer shadow-md hover:shadow-xl rounded-sm"
+                        onclick="this.classList.toggle('rotate-y-180')">
+                        <div
+                            class="absolute inset-0 backface-hidden bg-white p-2 border border-gray-200 flex flex-col overflow-hidden rounded-sm">
+                            <img src="images/image5.jpeg" class="w-full h-full object-cover" alt="照片5">
+                        </div>
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 bg-[#fff5f7] p-2 border-2 border-dashed border-pink-200 flex items-center justify-center text-center rounded-sm">
+                            <span class="text-gray-600 text-sm">(背面文字)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 照片 6 -->
+                <div class="w-44 h-52 perspective-1000 transform md:rotate-6">
+                    <div class="w-full h-full transition-transform duration-700 transform-style-3d cursor-pointer shadow-md hover:shadow-xl rounded-sm"
+                        onclick="this.classList.toggle('rotate-y-180')">
+                        <div
+                            class="absolute inset-0 backface-hidden bg-white p-2 border border-gray-200 flex flex-col overflow-hidden rounded-sm">
+                            <img src="images/image6.jpeg" class="w-full h-full object-cover" alt="照片6">
+                        </div>
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 bg-[#fff5f7] p-2 border-2 border-dashed border-pink-200 flex items-center justify-center text-center rounded-sm">
+                            <span class="text-gray-600 text-sm">(背面文字)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第四區塊：第六段文字 + 照片 7 & 8 -->
+        <div class="flex flex-col md:flex-row-reverse gap-8 mb-10 items-start">
+            <div class="flex-1 text-lg md:text-xl space-y-6">
+                <p class="indent-8 text-justify">
+                    我在遠方想著你，即使距離拆散我們，那又如何，我的心早已緊緊跟著你，那樣我也算是去過美國了吧！人生總是那麼多未知數，鼓起勇氣，帶著笑臉面對生活的未知與挑戰，是我現在告訴自己的人生指南，我也想把這段話送給寶寶，希望寶寶在那裡無論是工作、生活還是旅遊等等任何時候，當我們面臨困難與抉擇的時候，也要打起勇氣，面帶笑容的去突破與挑戰。
+                </p>
+                <p class="indent-8 text-justify">
+                    這個過程很難熬，但是當我們抵達路途的終點時，回頭一看會發現自己已經成長了，看這封信的當下可能不見得會有感覺，但請寶寶記得，遇到事情的時候，就打開這封信再看一次，很多時候我們覺得的小事，都不斷地在消耗著我們內心的電量，當寶寶沒電的時候，也可以看看這封信，當然也要告訴我，等我醒來或是忙完之後，就會陪著寶寶的！
+                </p>
+            </div>
+            <!-- 照片群組 4 -->
+            <div class="flex flex-col gap-4 items-center w-full md:w-auto pt-4">
+                <!-- 照片 7 -->
+                <div class="w-48 h-56 perspective-1000 transform md:-rotate-2">
+                    <div class="w-full h-full transition-transform duration-700 transform-style-3d cursor-pointer shadow-md hover:shadow-xl rounded-sm"
+                        onclick="this.classList.toggle('rotate-y-180')">
+                        <div
+                            class="absolute inset-0 backface-hidden bg-white p-2 md:p-3 border border-gray-200 flex flex-col overflow-hidden rounded-sm">
+                            <img src="images/image7.jpeg" class="w-full h-full object-cover" alt="照片7">
+                        </div>
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 bg-[#fff5f7] p-4 border-2 border-dashed border-pink-200 flex items-center justify-center text-center rounded-sm">
+                            <span class="text-gray-600 text-sm md:text-base">(背面文字<br>晚一點補充)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 照片 8 -->
+                <div class="w-48 h-56 perspective-1000 transform md:rotate-4">
+                    <div class="w-full h-full transition-transform duration-700 transform-style-3d cursor-pointer shadow-md hover:shadow-xl rounded-sm"
+                        onclick="this.classList.toggle('rotate-y-180')">
+                        <div
+                            class="absolute inset-0 backface-hidden bg-white p-2 md:p-3 border border-gray-200 flex flex-col overflow-hidden rounded-sm">
+                            <img src="images/image8.jpeg" class="w-full h-full object-cover" alt="照片8">
+                        </div>
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 bg-[#fff5f7] p-4 border-2 border-dashed border-pink-200 flex items-center justify-center text-center rounded-sm">
+                            <span class="text-gray-600 text-sm md:text-base">(背面文字<br>晚一點補充)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第五區塊：結尾與落款 + 照片 9 -->
+        <div class="mt-12 flex flex-col items-center">
+            <p class="text-xl md:text-2xl text-center mb-8 font-semibold text-gray-800">
+                我親愛的葉寶寶，嘻嘻在這呢！<br />我一直都在，別怕！<br>我永遠是你的避風港。
+            </p>
+
+            <!-- 照片 9 (放在結尾處) -->
+            <div class="w-56 h-64 perspective-1000 transform mb-12">
+                <div class="w-full h-full transition-transform duration-700 transform-style-3d cursor-pointer shadow-lg hover:shadow-2xl rounded-sm"
+                    onclick="this.classList.toggle('rotate-y-180')">
+                    <div
+                        class="absolute inset-0 backface-hidden bg-white p-3 border border-gray-200 overflow-hidden rounded-sm">
+                        <!-- 裝飾小貼紙 -->
+                        <div class="absolute -top-3 -right-3 text-3xl z-10">🐶</div>
+                        <img src="images/image9.jpeg" class="w-full h-full object-cover" alt="照片9">
+                    </div>
+                    <div
+                        class="absolute inset-0 backface-hidden rotate-y-180 bg-[#fff5f7] p-6 border-2 border-dashed border-pink-300 flex items-center justify-center text-center rounded-sm">
+                        <span class="text-gray-700 text-lg font-bold">(背面文字<br>等你補充！)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 落款 -->
+            <div class="w-full flex justify-end px-4 md:px-12 relative">
+                <div class="absolute right-32 bottom-8 text-2xl opacity-60">💖</div>
+                <div class="text-right text-xl md:text-2xl font-bold text-gray-800 tracking-wider">
+                    <p class="mb-2">愛你一輩子</p>
+                    <p class="text-2xl md:text-3xl text-pink-700">辰禧</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
